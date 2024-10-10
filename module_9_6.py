@@ -1,22 +1,17 @@
 def all_variants(text):
-    # while True:
-    #     yield text[0]
-    #     yield text[1]
-    #     yield text[2]
-    #     break
-    # while True:
-    #     yield text[0] + text[1]
-    #     yield text[1] + text[2]
-    #     break
-    # yield text[0] + text[1] + text[2]
 
     for i in text:
-        if i in text:
-            yield i
-    for j in text:
-        if j == text[0]:
-            yield j + text[1]
-            yield text[1] + text[2]
+        yield i
+    # Генерируем уникальные строки длиной в 2 символа которые идут по порядку и не повторяются друг с другом
+    s = set() # используем множество, чтобы избежать повторов
+    for i in range(len(text)):
+        for j in range(len(text)):
+            line_s = text[i:j+1] # переменная которая добавляет по одной букве в каждой строке зависимости от
+            # длины слова
+            if len(line_s) == 2 and i != j: # тут я делаю так чтоб в каждой строке было по две буквы и чтоб буквы
+                # не повторялись друг с другом через множество
+                s.add(line_s)
+                yield line_s
     yield text
 
 
@@ -24,13 +19,8 @@ def all_variants(text):
 
 
 
-a = all_variants("abc")
-# print(next(a))
-# print(next(a))
-# print(next(a))
-# print(next(a))
-# print(next(a))
-# print(next(a))
+
+a = all_variants("abcclhgt")
 for i in a:
     print(i)
 
